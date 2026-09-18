@@ -1,0 +1,35 @@
+.card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  position: relative;
+  border-radius: 20px;
+  outline-offset: 5px;
+  -webkit-tap-highlight-color: transparent;
+}
+.surface {
+  height: 100%;
+  border-radius: inherit;
+  transform: perspective(850px) rotateX(0deg) rotateY(0deg);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.35s ease;
+}
+.card[data-engaged='true'] > .surface,
+.card:focus-visible > .surface {
+  transform: perspective(850px) translateY(-7px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y))
+    scale(1.025);
+  filter: drop-shadow(0 14px 14px #26344916);
+}
+@media (hover: hover) and (pointer: fine) {
+  .card:hover > .surface {
+    transform: perspective(850px) translateY(-10px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y))
+      scale(1.035);
+    filter: drop-shadow(0 14px 14px #26344916);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card > .surface {
+    transition: none;
+    transform: none !important;
+  }
+}

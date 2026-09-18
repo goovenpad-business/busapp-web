@@ -1,9 +1,7 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# MboaGo — landing page
 
-# This is NOT the Next.js you know
+Projet React, TypeScript et Vite. Les sources sont dans `src/` et le build dans `dist/`. Ne pas modifier les fichiers générés de `dist/`.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+Conserver les styles, icônes et polices MboaGo. Avant livraison : `npm run lint`, `npm run typecheck`, `npm run build` et les parcours navigateur concernés. Conserver le prérendu HTML et les métadonnées du site vitrine.
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+Les versions exactes sont verrouillées dans `package-lock.json`. Node.js 22.12 minimum ; Node.js 24 recommandé.

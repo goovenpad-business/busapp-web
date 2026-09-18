@@ -1,5 +1,4 @@
-'use client';
-
+import { useTranslation } from 'react-i18next';
 import {
   useRef,
   useState,
@@ -9,7 +8,8 @@ import {
   type ReactNode,
 } from 'react';
 import { serviceModes } from '@/config/services';
-import { Arrow, Icon } from './icons';
+import { useSpringIndicator } from '@/hooks/use-spring-indicator';
+import { Icon } from './icons';
 import styles from './service-showcase.module.css';
 
 type Gesture = {
@@ -19,28 +19,30 @@ type Gesture = {
   origin: number;
   surface: 'tabs' | 'content';
   dragging: boolean;
+  bounds: DOMRect;
 };
 
 const clamp = (value: number) => Math.max(0, Math.min(serviceModes.length - 1, value));
 
 export function ServiceShowcase({ panels }: { panels: ReactNode[] }) {
+  const { t } = useTranslation();
   const [active, setActive] = useState(0);
   const activeRef = useRef(0);
-  const [progress, setProgress] = useState<number | null>(null);
-  const [direction, setDirection] = useState(1);
-  const [announcement, setAnnouncement] = useState('');
+  const [dragging, setDragging] = useState(false);
+  const { indicatorRef, follow, settle: settleIndicator } = useSpringIndicator();
+  const [announced, setAnnounced] = useState<number | null>(null);
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
   const gesture = useRef<Gesture | null>(null);
   const suppressClick = useRef(false);
 
-  function select(index: number, announce = true) {
+  function select(index: number, announce = true, settle = true) {
     const next = clamp(index);
     if (next !== activeRef.current) {
-      setDirection(next > activeRef.current ? 1 : -1);
       activeRef.current = next;
       setActive(next);
     }
-    if (announce) setAnnouncement(`${serviceModes[next].announcement} : présentation affichée.`);
+    if (settle) settleIndicator(next);
+    if (announce) setAnnounced(next);
   }
 
   function keyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
@@ -68,6 +70,7 @@ export function ServiceShowcase({ panels }: { panels: ReactNode[] }) {
       origin: activeRef.current,
       surface,
       dragging: false,
+      bounds: event.currentTarget.getBoundingClientRect(),
     };
   }
 
@@ -84,23 +87,24 @@ export function ServiceShowcase({ panels }: { panels: ReactNode[] }) {
       }
       if (Math.abs(dx) < 8 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
       current.dragging = true;
+      setDragging(true);
       suppressClick.current = true;
       event.currentTarget.setPointerCapture(event.pointerId);
     }
-    const bounds = event.currentTarget.getBoundingClientRect();
+    const bounds = current.bounds;
     const position =
       current.surface === 'tabs'
         ? (event.clientX - bounds.left - 4) / ((bounds.width - 8) / serviceModes.length) - 0.5
         : current.origin - dx / Math.min(180, Math.max(90, bounds.width * 0.3));
-    setProgress(clamp(position));
-    select(Math.round(clamp(position)), false);
+    follow(clamp(position));
+    select(Math.round(clamp(position)), false, false);
   }
 
   function finish(event: PointerEvent<HTMLDivElement>, cancelled = false) {
     const current = gesture.current;
     if (!current || current.pointerId !== event.pointerId) return;
     gesture.current = null;
-    setProgress(null);
+    setDragging(false);
     if (current.dragging) {
       select(cancelled ? current.origin : activeRef.current);
       if (!cancelled && current.surface === 'tabs')
@@ -122,32 +126,17 @@ export function ServiceShowcase({ panels }: { panels: ReactNode[] }) {
   };
 
   return (
-    <div
-      className={styles.showcase}
-      style={
-        {
-          '--service-progress': progress ?? active,
-          '--service-direction': direction,
-        } as CSSProperties
-      }
-      data-dragging={progress !== null}
-    >
+    <div className={styles.showcase} data-dragging={dragging}>
       <div className="container">
         <div className={styles.strip}>
-          <p className={styles.intro}>
-            Une app.
-            <br />
-            <strong>Toutes vos envies.</strong>
-          </p>
           <div
             className={styles.tabs}
             role="tablist"
-            aria-label="Les envies MboaGo"
-            aria-describedby="service-gesture-hint"
+            aria-label={t('services.tabs')}
             onPointerDown={(event) => pointerDown(event, 'tabs')}
             {...pointerEvents}
           >
-            <span className={styles.indicator} aria-hidden="true" />
+            <span ref={indicatorRef} className={styles.indicator} aria-hidden="true" />
             {serviceModes.map((mode, index) => (
               <button
                 key={mode.id}
@@ -172,23 +161,19 @@ export function ServiceShowcase({ panels }: { panels: ReactNode[] }) {
                 }}
               >
                 <Icon name={mode.icon} size={36} />
-                <span>{mode.label}</span>
+                <span className={styles.tabCopy}>
+                  <span>{t(mode.label)}</span>
+                  <small>{t(mode.category)}</small>
+                </span>
               </button>
             ))}
           </div>
-          <span className={styles.hint} id="service-gesture-hint">
-            <Arrow name="repeat" size={18} />
-            <span>
-              Cliquez ou glissez.
-              <br /> Suivez votre envie.
-            </span>
-          </span>
         </div>
       </div>
       <section
         className={`section container ${styles.section}`}
         id="decouvrir"
-        aria-label="Découvrez les services MboaGo"
+        aria-label={t('services.label')}
       >
         <div
           className={styles.panels}
@@ -214,6 +199,7 @@ export function ServiceShowcase({ panels }: { panels: ReactNode[] }) {
               inert={active !== index}
               tabIndex={active === index ? 0 : -1}
               data-active={active === index}
+              style={{ '--panel-side': Math.sign(index - active) } as CSSProperties}
             >
               {panels[index]}
             </div>
@@ -221,7 +207,8 @@ export function ServiceShowcase({ panels }: { panels: ReactNode[] }) {
         </div>
       </section>
       <p className={styles.srOnly} role="status" aria-live="polite" aria-atomic="true">
-        {announcement}
+        {announced !== null &&
+          t('services.announcement', { service: t(serviceModes[announced].announcement) })}
       </p>
     </div>
   );

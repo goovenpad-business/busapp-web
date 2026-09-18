@@ -15,15 +15,15 @@ test('service tabs change the full content, keep the layout stable and support t
   const originalHeight = await page
     .locator('#decouvrir')
     .evaluate((element) => element.getBoundingClientRect().height);
-  await expect(tabs.getByRole('tab', { selected: true })).toHaveText('Prenez la route');
+  await expect(tabs.getByRole('tab', { selected: true })).toContainText('Prenez la route');
   for (const [label, card] of [
-    ['Posez vos valises', 'La bonne adresse, au bon endroit.'],
-    ['Vivez le moment', 'Les bons moments se partagent.'],
-    ['Prenez la route', 'La bonne place. La vôtre.'],
+    ['Posez vos valises', 'Votre prochaine adresse ?'],
+    ['Vivez le moment', 'Ensemble, c’est encore mieux.'],
+    ['Prenez la route', 'Votre place préférée.'],
   ]) {
     await tabs.getByRole('tab', { name: label }).click();
-    await expect(tabs.getByRole('tab', { selected: true })).toHaveText(label);
-    await expect(panel.getByRole('heading', { level: 2, name: card })).toBeVisible();
+    await expect(tabs.getByRole('tab', { selected: true })).toContainText(label);
+    await expect(panel.getByText(card, { exact: true })).toBeVisible();
     expect(
       await page
         .locator('#decouvrir')
@@ -43,7 +43,7 @@ test('service tabs change the full content, keep the layout stable and support t
   }
   await tabs.getByRole('tab', { name: 'Prenez la route' }).press('ArrowRight');
   await expect(tabs.getByRole('tab', { name: 'Posez vos valises' })).toBeFocused();
-  await expect(panel).toContainText('La bonne adresse, au bon endroit.');
+  await expect(panel).toContainText('Votre prochaine adresse ?');
   await page.keyboard.press('End');
   await expect(tabs.getByRole('tab', { name: 'Vivez le moment' })).toBeFocused();
   await page.keyboard.press('Home');
@@ -62,35 +62,31 @@ test('holding and dragging changes views before release, clamps at edges and sup
   await page.mouse.move(x(0), y);
   await page.mouse.down();
   await page.mouse.move(x(1), y, { steps: 8 });
-  await expect(tabs.getByRole('tab', { selected: true })).toHaveText('Posez vos valises');
+  await expect(tabs.getByRole('tab', { selected: true })).toContainText('Posez vos valises');
   await expect(page.locator('#decouvrir').getByRole('tabpanel')).toContainText(
-    'La bonne adresse, au bon endroit.',
+    'Votre prochaine adresse ?',
   );
   await page.mouse.move(x(2), y, { steps: 8 });
-  await expect(tabs.getByRole('tab', { selected: true })).toHaveText('Vivez le moment');
+  await expect(tabs.getByRole('tab', { selected: true })).toContainText('Vivez le moment');
   await page.mouse.move(bounds.x + bounds.width + 25, y);
   await page.mouse.up();
-  await expect(tabs.getByRole('tab', { selected: true })).toHaveText('Vivez le moment');
+  await expect(tabs.getByRole('tab', { selected: true })).toContainText('Vivez le moment');
   await expect(tabs.getByRole('tab', { name: 'Vivez le moment' })).toBeFocused();
 
   // A click after dragging must not be swallowed by click suppression.
   await tabs.getByRole('tab', { name: 'Prenez la route' }).click();
-  const heading = page
-    .locator('#decouvrir')
-    .getByRole('tabpanel')
-    .getByRole('heading', { level: 2 })
-    .first();
-  await heading.scrollIntoViewIfNeeded();
-  const rect = await heading.boundingBox();
+  const card = page.locator('#decouvrir').getByRole('tabpanel').getByRole('article').first();
+  await card.scrollIntoViewIfNeeded();
+  const rect = await card.boundingBox();
   if (!rect) throw new Error('Service content is not visible');
   const startX = rect.x + Math.min(rect.width - 10, 240);
   await page.mouse.move(startX, rect.y + 20);
   await page.mouse.down();
   await page.mouse.move(startX - 120, rect.y + 20, { steps: 10 });
-  await expect(tabs.getByRole('tab', { selected: true })).toHaveText('Posez vos valises');
+  await expect(tabs.getByRole('tab', { selected: true })).toContainText('Posez vos valises');
   await page.mouse.up();
   await expect(page.locator('#decouvrir').getByRole('tabpanel')).toContainText(
-    'La bonne adresse, au bon endroit.',
+    'Votre prochaine adresse ?',
   );
 });
 
@@ -112,22 +108,22 @@ test('native touch scrubbing, cancellation and vertical page scrolling', async (
     });
   await touch('touchStart', x(0), y);
   await touch('touchMove', x(1), y);
-  await expect(tabs.getByRole('tab', { selected: true })).toHaveText('Posez vos valises');
+  await expect(tabs.getByRole('tab', { selected: true })).toContainText('Posez vos valises');
   await touch('touchCancel');
-  await expect(tabs.getByRole('tab', { selected: true })).toHaveText('Prenez la route');
+  await expect(tabs.getByRole('tab', { selected: true })).toContainText('Prenez la route');
   await touch('touchStart', x(0), y);
   await touch('touchMove', x(1), y);
   await touch('touchMove', x(2), y);
-  await expect(tabs.getByRole('tab', { selected: true })).toHaveText('Vivez le moment');
+  await expect(tabs.getByRole('tab', { selected: true })).toContainText('Vivez le moment');
   await touch('touchEnd');
   await expect(page.locator('#decouvrir').getByRole('tabpanel')).toContainText(
-    'Les bons moments se partagent.',
+    'Ensemble, c’est encore mieux.',
   );
   const scrollBefore = await page.evaluate(() => window.scrollY);
   await touch('touchStart', x(1), y);
   for (let delta = 20; delta <= 120; delta += 20) await touch('touchMove', x(1), y - delta);
   await touch('touchEnd');
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(scrollBefore + 30);
-  await expect(tabs.getByRole('tab', { selected: true })).toHaveText('Vivez le moment');
+  await expect(tabs.getByRole('tab', { selected: true })).toContainText('Vivez le moment');
   await cdp.detach();
 });

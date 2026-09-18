@@ -1,10 +1,11 @@
-'use client';
-
+import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import { navigation } from '@/config/site';
+import { LanguageSelector } from './language-selector';
 import { Arrow, Brand } from './icons';
 
 export function Navigation() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
   useEffect(() => {
@@ -22,36 +23,44 @@ export function Navigation() {
     <header className="site-header">
       <div className="container header-inner">
         <Brand />
-        <nav aria-label="Navigation principale" className="desktop-nav">
+        <nav aria-label={t('navigation.main')} className="desktop-nav">
           {navigation.map((item) => (
             <a key={item.href} href={item.href}>
-              {item.label}
+              {t(item.label)}
             </a>
           ))}
         </nav>
-        <a className="button button-dark header-cta" href="#telecharger">
-          L’application <Arrow name="external" size={17} />
-        </a>
-        <button
-          ref={toggle}
-          className="menu-toggle"
-          aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen(!open)}
-        >
-          <Arrow name={open ? 'close' : 'menu'} size={25} />
-        </button>
+        <div className="header-actions">
+          <LanguageSelector />
+          <a className="button button-dark header-cta" href="#telecharger">
+            {t('navigation.app')} <Arrow name="external" size={17} />
+          </a>
+          <button
+            ref={toggle}
+            className="menu-toggle"
+            aria-label={open ? t('navigation.close') : t('navigation.open')}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen(!open)}
+          >
+            <Arrow name={open ? 'close' : 'menu'} size={25} />
+          </button>
+        </div>
       </div>
-      <nav id="mobile-menu" aria-label="Navigation mobile" className="mobile-nav" hidden={!open}>
+      <nav
+        id="mobile-menu"
+        aria-label={t('navigation.mobile')}
+        className="mobile-nav"
+        hidden={!open}
+      >
         {navigation.map((item) => (
           <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
-            {item.label}
+            {t(item.label)}
             <Arrow size={18} />
           </a>
         ))}
         <a href="#telecharger" onClick={() => setOpen(false)}>
-          Obtenir MboaGo <Arrow name="external" size={18} />
+          {t('navigation.get')} <Arrow name="external" size={18} />
         </a>
       </nav>
     </header>

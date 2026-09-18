@@ -1,123 +1,43 @@
-import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 import { serviceModes, type ServiceMode } from '@/config/services';
-import type { PremiumGlyphName } from './PremiumGlyph';
 import { Arrow, Icon } from './icons';
 import { ServiceShowcase } from './service-showcase';
 import styles from './service-showcase.module.css';
+import { InteractiveCard } from './interactive-card';
+import type { ParseKeys } from 'i18next';
+import type { CSSProperties } from 'react';
 
 type Visual =
   'route' | 'seats' | 'ticket' | 'stay' | 'places' | 'activities' | 'friends' | 'memories';
-type Card = {
-  title: string;
-  description: string;
-  icon: PremiumGlyphName;
-  label: string;
-  tone: string;
-  visual: Visual;
-};
+type Card = { label: ParseKeys; visual: Visual };
 
-const content: Record<ServiceMode, { cards: Card[] }> = {
-  travel: {
-    cards: [
-      {
-        title: 'Votre prochain départ est ici.',
-        description: 'Trouvez votre trajet et comparez les départs pour voyager à votre rythme.',
-        icon: 'bus',
-        label: 'VOTRE TRAJET',
-        tone: 'travel',
-        visual: 'route',
-      },
-      {
-        title: 'La bonne place. La vôtre.',
-        description:
-          'Fenêtre pour le paysage ou couloir pour bouger ? Choisissez votre siège avant de partir.',
-        icon: 'seat',
-        label: 'VOTRE CONFORT',
-        tone: 'stay',
-        visual: 'seats',
-      },
-      {
-        title: 'Un billet. Zéro recherche.',
-        description:
-          'Retrouvez votre réservation et les détails de votre voyage dans l’espace « Mes billets ».',
-        icon: 'ticket',
-        label: 'VOTRE BILLET',
-        tone: 'activity',
-        visual: 'ticket',
-      },
-    ],
-  },
-  stay: {
-    cards: [
-      {
-        title: 'Faites comme chez vous. Ailleurs.',
-        description:
-          'Une escapade en bord de mer ou une parenthèse au calme : trouvez votre prochain pied-à-terre.',
-        icon: 'hotel',
-        label: 'VOTRE PARENTHÈSE',
-        tone: 'stay',
-        visual: 'stay',
-      },
-      {
-        title: 'La bonne adresse, au bon endroit.',
-        description:
-          'Explorez les hébergements de votre destination pour rester près de ce qui vous fait envie.',
-        icon: 'location',
-        label: 'VOTRE DESTINATION',
-        tone: 'travel',
-        visual: 'places',
-      },
-      {
-        title: 'Votre séjour, bien rangé.',
-        description:
-          'Dates, hébergement, voyageurs : les informations de votre réservation vous accompagnent dans l’app.',
-        icon: 'luggage',
-        label: 'VOTRE RÉSERVATION',
-        tone: 'activity',
-        visual: 'ticket',
-      },
-    ],
-  },
-  activity: {
-    cards: [
-      {
-        title: 'À chaque envie, sa sortie.',
-        description:
-          'Cinéma, loisirs, grand air ou soirée : découvrez des activités pour changer du quotidien.',
-        icon: 'activity',
-        label: 'VOTRE INSPIRATION',
-        tone: 'activity',
-        visual: 'activities',
-      },
-      {
-        title: 'Les bons moments se partagent.',
-        description:
-          'Retrouvez-vous, essayez quelque chose de nouveau et faites de cette journée un souvenir.',
-        icon: 'groups',
-        label: 'VOTRE MOMENT',
-        tone: 'stay',
-        visual: 'friends',
-      },
-      {
-        title: 'Découvrez. Vivez. Recommencez.',
-        description:
-          'Explorez les expériences partagées dans l’app et trouvez l’inspiration pour votre prochaine sortie.',
-        icon: 'compass',
-        label: 'VOTRE PROCHAINE IDÉE',
-        tone: 'travel',
-        visual: 'memories',
-      },
-    ],
-  },
+const content: Record<ServiceMode, Card[]> = {
+  travel: [
+    { label: 'cards.labels.route', visual: 'route' },
+    { label: 'cards.labels.seat', visual: 'seats' },
+    { label: 'cards.labels.ticket', visual: 'ticket' },
+  ],
+  stay: [
+    { label: 'cards.labels.stay', visual: 'stay' },
+    { label: 'cards.labels.destination', visual: 'places' },
+    { label: 'cards.labels.booking', visual: 'ticket' },
+  ],
+  activity: [
+    { label: 'cards.labels.activities', visual: 'activities' },
+    { label: 'cards.labels.friends', visual: 'friends' },
+    { label: 'cards.labels.discovery', visual: 'memories' },
+  ],
 };
 
 function Visual({ kind, mode }: { kind: Visual; mode: ServiceMode }) {
+  const { t } = useTranslation();
   if (kind === 'route')
     return (
       <div className="route-card">
         <span className="route-card-top">
           <Icon name="bus" size={24} />
-          Votre prochain voyage<span className="small-badge">Aller simple</span>
+          {t('cards.nextTrip')}
+          <span className="small-badge">{t('cards.oneWay')}</span>
         </span>
         <div className="route-cities">
           <strong>Douala</strong>
@@ -130,26 +50,26 @@ function Visual({ kind, mode }: { kind: Visual; mode: ServiceMode }) {
         </div>
         <div className="route-card-bottom">
           <span>
-            <Icon name="seat" size={20} /> Fenêtre ou couloir ?
+            <Icon name="seat" size={20} /> {t('cards.window')}
           </span>
-          <span>À vous de choisir.</span>
+          <span>{t('cards.choice')}</span>
         </div>
       </div>
     );
   if (kind === 'stay' || kind === 'friends')
     return (
       <div className="feature-photo">
-        <Image
+        <img
+          decoding="async"
+          loading="lazy"
           src={kind === 'stay' ? '/images/stay.webp' : '/images/discover.webp'}
-          alt={
-            kind === 'stay' ? 'Hôtel avec piscine et palmiers' : 'Une sortie partagée entre amis'
-          }
-          fill
-          sizes="(max-width: 900px) 90vw, 380px"
+          alt={kind === 'stay' ? t('cards.hotelAlt') : t('cards.friendsAlt')}
+          className="cover-image"
+          sizes="(max-width: 600px) 85vw, 350px"
         />
         <span>
           <Icon name={kind === 'stay' ? 'hotel' : 'heart'} size={22} />
-          {kind === 'stay' ? 'Votre parenthèse à vous' : 'Ensemble, c’est encore mieux.'}
+          {kind === 'stay' ? t('cards.hotelCaption') : t('cards.friendsCaption')}
         </span>
       </div>
     );
@@ -170,7 +90,7 @@ function Visual({ kind, mode }: { kind: Visual; mode: ServiceMode }) {
         </div>
         <p>
           <span className={styles.legendDot} />
-          Votre place préférée.
+          {t('cards.favoriteSeat')}
         </p>
       </div>
     );
@@ -178,15 +98,16 @@ function Visual({ kind, mode }: { kind: Visual; mode: ServiceMode }) {
     return (
       <div className={styles.ticketPreview}>
         <span className={styles.ticketEyebrow}>
-          <Icon name={mode === 'stay' ? 'hotel' : 'ticket'} size={27} /> MES BILLETS{' '}
+          <Icon name={mode === 'stay' ? 'hotel' : 'ticket'} size={27} />{' '}
+          {mode === 'stay' ? t('cards.hotelEyebrow') : t('cards.ticketEyebrow')}{' '}
           <span className={styles.ticketCheck}>
             <Arrow name="check" size={15} />
           </span>
         </span>
-        <strong>{mode === 'stay' ? 'Votre prochaine pause' : 'Douala → Yaoundé'}</strong>
-        <p>{mode === 'stay' ? 'Hébergement · Dates · Voyageurs' : 'Trajet · Départ · Siège'}</p>
+        <strong>{mode === 'stay' ? t('cards.doubleRoom') : 'Douala → Yaoundé'}</strong>
+        <p>{mode === 'stay' ? t('cards.hotelDetails') : t('cards.tripDetails')}</p>
         <div className={styles.ticketFooter}>
-          Tout est là. Dans votre poche.
+          {mode === 'stay' ? t('cards.hotelFooter') : t('cards.ticketFooter')}
           <Arrow name="phone" size={18} />
         </div>
       </div>
@@ -195,7 +116,7 @@ function Visual({ kind, mode }: { kind: Visual; mode: ServiceMode }) {
     return (
       <div className={styles.placesPreview}>
         <Icon name="location" size={48} />
-        <span>Votre prochaine adresse ?</span>
+        <span>{t('cards.address')}</span>
         <div>
           {['Kribi', 'Douala', 'Yaoundé'].map((city) => (
             <span key={city}>{city}</span>
@@ -206,15 +127,17 @@ function Visual({ kind, mode }: { kind: Visual; mode: ServiceMode }) {
   if (kind === 'memories')
     return (
       <div className={styles.memoryPreview}>
-        <Image
+        <img
+          decoding="async"
+          loading="lazy"
           src="/images/kribi.jpg"
-          alt="Une plage bordée de palmiers à Kribi"
-          fill
-          sizes="(max-width: 900px) 90vw, 380px"
+          alt={t('cards.beachAlt')}
+          className="cover-image"
+          sizes="(max-width: 600px) 85vw, 350px"
         />
         <div>
           <Icon name="compass" size={30} />
-          <span>Et si on sortait des habitudes ?</span>
+          <span>{t('cards.outdoors')}</span>
         </div>
       </div>
     );
@@ -222,10 +145,10 @@ function Visual({ kind, mode }: { kind: Visual; mode: ServiceMode }) {
     <div className="activity-tiles">
       {(
         [
-          { name: 'cinema', label: 'Un bon film' },
-          { name: 'bowling', label: 'Entre amis' },
-          { name: 'activity', label: 'Au grand air' },
-          { name: 'nightlife', label: 'Après le sunset' },
+          { name: 'cinema', label: t('cards.cinema') },
+          { name: 'bowling', label: t('cards.friends') },
+          { name: 'activity', label: t('cards.freshAir') },
+          { name: 'nightlife', label: t('cards.nightlife') },
         ] as const
       ).map((item) => (
         <div key={item.name}>
@@ -238,34 +161,30 @@ function Visual({ kind, mode }: { kind: Visual; mode: ServiceMode }) {
 }
 
 export function ServiceFeatures() {
+  const { t } = useTranslation();
   return (
     <ServiceShowcase
-      panels={serviceModes.map((mode) => {
-        const current = content[mode.id];
-        return (
-          <div key={mode.id}>
-            <div className={`feature-grid ${styles.cards}`}>
-              {current.cards.map((card, index) => (
-                <article className={`feature feature-${card.tone} ${styles.card}`} key={card.label}>
-                  <div className="feature-top">
-                    <span className="feature-icon">
-                      <Icon name={card.icon} size={40} />
-                    </span>
-                    <span className="feature-number">
-                      0{index + 1} / {card.label}
-                    </span>
-                  </div>
-                  <h2>{card.title}</h2>
-                  <p>{card.description}</p>
-                  <div className={styles.visual}>
-                    <Visual kind={card.visual} mode={mode.id} />
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        );
-      })}
+      panels={serviceModes.map((mode) => (
+        <div className={styles.cards} key={mode.id}>
+          {content[mode.id].map((card, index) => (
+            <article
+              className={styles.card}
+              aria-label={t(card.label)}
+              key={card.label}
+              style={{ '--card-order': index } as CSSProperties}
+            >
+              <div className={styles.cardEntrance}>
+                <InteractiveCard
+                  className={styles.visual}
+                  label={t('cards.preview', { label: t(card.label) })}
+                >
+                  <Visual kind={card.visual} mode={mode.id} />
+                </InteractiveCard>
+              </div>
+            </article>
+          ))}
+        </div>
+      ))}
     />
   );
 }

@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { site } from '@/config/site';
 import { Arrow } from './icons';
 
 export function StoreLinks({ inverse = false }: { inverse?: boolean }) {
+  const { t } = useTranslation();
   return (
     <div className={`store-links${inverse ? ' store-links-inverse' : ''}`}>
       {[
@@ -12,7 +14,7 @@ export function StoreLinks({ inverse = false }: { inverse?: boolean }) {
           <>
             <Arrow name="phone" size={27} />
             <span>
-              <small>{store.url ? 'Télécharger sur' : 'Bientôt sur'}</small>
+              <small>{store.url ? t('store.download') : t('store.soon')}</small>
               <strong>{store.name}</strong>
             </span>
             {store.url && <Arrow name="external" size={16} />}
@@ -25,7 +27,7 @@ export function StoreLinks({ inverse = false }: { inverse?: boolean }) {
             href={store.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Télécharger MboaGo sur ${store.name} (nouvel onglet)`}
+            aria-label={t('store.link', { store: store.name })}
           >
             {content}
           </a>
@@ -33,7 +35,7 @@ export function StoreLinks({ inverse = false }: { inverse?: boolean }) {
           <div
             key={store.name}
             className="store-link store-pending"
-            aria-label={`MboaGo pour ${store.platform}, bientôt disponible`}
+            aria-label={t('store.pending', { platform: store.platform })}
           >
             {content}
           </div>

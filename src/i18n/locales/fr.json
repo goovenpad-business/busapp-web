@@ -1,0 +1,270 @@
+{
+  "common": {
+    "skip": "Aller au contenu",
+    "download": "Télécharger MboaGo",
+    "discover": "Découvrir MboaGo",
+    "madeFor": "Pensé pour le Cameroun",
+    "explore": "Explorer",
+    "home": "Accueil",
+    "profile": "Profil",
+    "tickets": "Mes billets"
+  },
+  "navigation": {
+    "app": "L’application",
+    "inspiration": "Inspirations",
+    "how": "Comment ça marche",
+    "faq": "FAQ",
+    "main": "Navigation principale",
+    "mobile": "Navigation mobile",
+    "close": "Fermer le menu",
+    "open": "Ouvrir le menu",
+    "get": "Obtenir MboaGo",
+    "footer": "Navigation de pied de page",
+    "top": "Revenir en haut de page",
+    "home": "MboaGo, accueil"
+  },
+  "language": {
+    "label": "Langue du site"
+  },
+  "hero": {
+    "eyebrow": "VOTRE PROCHAINE ENVIE COMMENCE ICI",
+    "travel": "Voyagez.",
+    "stay": "Séjournez.",
+    "enjoy": "Profitez",
+    "description": "Un voyage en bus, une nuit à l’hôtel, une activité à partager.",
+    "promise": "Tout votre Cameroun, dans une seule app.",
+    "letsGo": "Et si on partait ?",
+    "mobile": "Retrouvez MboaGo sur votre mobile",
+    "soon": "Bientôt sur iOS et Android",
+    "imageAlt": "Illustration de l’application : un bus sur une route bordée de montagnes et de palmiers",
+    "happiness": "LE BONHEUR EST EN CHEMIN",
+    "road": "On prend la route ?",
+    "direction": "Direction <strong>les bons moments.</strong>",
+    "allHere": "Tout est là.",
+    "pocket": "Vos billets, dans votre poche."
+  },
+  "how": {
+    "eyebrow": "MOINS DE CLICS. PLUS DE DÉCLICS.",
+    "trip": "Votre trajet.",
+    "hotel": "Votre hôtel.",
+    "activities": "Vos activités",
+    "description": "Vous choisissez. MboaGo réunit vos réservations.",
+    "enjoy": "À vous les bons moments.",
+    "cta": "Emportez MboaGo",
+    "busTitle": "Le bus qui vous arrange.",
+    "busDescription": "Comparez les départs, choisissez votre siège et retrouvez votre billet. On prend la route ?",
+    "hotelTitle": "Un hôtel où se sentir bien.",
+    "hotelDescription": "Explorez les hôtels, découvrez les chambres et leurs tarifs. Vos dates, votre confort, votre petit coin de bonheur.",
+    "activityTitle": "Et aujourd’hui, on fait quoi ?",
+    "activityDescription": "Cinéma, bowling, karting, piscine… Trouvez votre activité, choisissez votre créneau et profitez, seul ou en groupe."
+  },
+  "destinations": {
+    "eyebrow": "PAS BESOIN DE PARTIR LOIN",
+    "titleStart": "L’ailleurs est",
+    "titleEnd": "juste à côté.",
+    "description": "Une côte à explorer. Une ville à redécouvrir.",
+    "invitation": "Et si votre prochaine histoire commençait ici ?",
+    "footer": "Le Cameroun se vit autant qu’il se visite.",
+    "explore": "À vous de l’explorer.",
+    "link": "Découvrir {{place}} avec MboaGo",
+    "imageAlt": "Vue de {{place}}, au Cameroun",
+    "kribi": {
+      "category": "L’appel de l’océan",
+      "description": "Les pieds dans le sable. L’esprit ailleurs.",
+      "tag": "Bord de mer"
+    },
+    "buea": {
+      "category": "Prendre de la hauteur",
+      "description": "Un grand bol d’air au pied du mont Cameroun.",
+      "tag": "Nature"
+    },
+    "douala": {
+      "category": "Au rythme de la ville",
+      "description": "Des adresses, des sorties, de belles rencontres.",
+      "tag": "City break"
+    },
+    "yaounde": {
+      "category": "Changer de perspective",
+      "description": "Sept collines et mille façons de s’évader.",
+      "tag": "Découverte"
+    }
+  },
+  "faq": {
+    "eyebrow": "AVANT DE PRENDRE LA ROUTE",
+    "titleStart": "On vous dit",
+    "titleEnd": "tout.",
+    "introStart": "Les réponses aux questions",
+    "introEnd": "que vous avez peut-être déjà.",
+    "about": {
+      "question": "Qu’est-ce que MboaGo ?",
+      "answer": "MboaGo est une application pensée pour voyager et sortir au Cameroun. Elle réunit les trajets en bus, les hôtels et leurs chambres, les activités et vos billets. Explorer vous donne des idées, votre profil accueille vos souvenirs et vos groupes rassemblent vos compagnons de voyage ou de sortie. Le projet est actuellement en préparation."
+    },
+    "available": {
+      "question": "L’application est-elle déjà disponible ?",
+      "answer": "MboaGo est en cours de préparation pour iOS et Android. Les liens officiels de téléchargement seront ajoutés à cette page dès sa publication sur l’App Store et Google Play."
+    },
+    "destinations": {
+      "question": "Quelles destinations peut-on découvrir ?",
+      "answer": "L’aperçu présente notamment Douala, Yaoundé, Kribi, Buéa, Limbé et Bafoussam. Les trajets, hébergements et activités réellement disponibles seront précisés dans l’application au lancement."
+    },
+    "booking": {
+      "question": "Comment fonctionnera la réservation ?",
+      "answer": "Choisissez un trajet et votre siège, un hôtel et votre chambre, ou une activité et son créneau. Consultez le récapitulatif, puis retrouvez vos réservations dans « Mes billets ». Les aperçus de cette page sont illustratifs : ils ne permettent pas d’effectuer une réservation réelle."
+    },
+    "payment": {
+      "question": "Quels moyens de paiement sont prévus ?",
+      "answer": "L’application prévoit MTN Mobile Money, Orange Money et la carte bancaire. Leur disponibilité sera confirmée au lancement. Aucun paiement n’est effectué ou collecté sur ce site."
+    }
+  },
+  "download": {
+    "ready": "VOTRE VOYAGE COMMENCE ICI",
+    "soon": "LE DÉPART APPROCHE",
+    "titleStart": "La prochaine belle histoire ?",
+    "titleEnd": "La vôtre.",
+    "description": "Un départ. Mille possibilités. Emportez MboaGo.",
+    "availableNote": "Choisissez votre store pour télécharger l’application.",
+    "pendingNote": "Bientôt disponible sur iOS et Android. On prépare le voyage."
+  },
+  "store": {
+    "download": "Télécharger sur",
+    "soon": "Bientôt sur",
+    "link": "Télécharger MboaGo sur {{store}} (nouvel onglet)",
+    "pending": "MboaGo pour {{platform}}, bientôt disponible"
+  },
+  "footer": {
+    "tagline": "Le Cameroun, à portée de main.",
+    "rights": "MboaGo. Tous droits réservés.",
+    "story": "Imaginé pour les départs. Et tout ce qui suit.",
+    "prototype": "Application en préparation. Visuels et parcours présentés à titre illustratif."
+  },
+  "preview": {
+    "travel": "Voyager",
+    "stay": "Séjourner",
+    "activity": "Sortir",
+    "label": "Aperçu interactif de MboaGo",
+    "greeting": "Un départ. Mille possibilités.",
+    "tabs": "Découvrir les services",
+    "where": "On vous emmène où ?",
+    "departure": "Départ",
+    "destination": "Destination",
+    "nextDeparture": "Votre prochain départ",
+    "journey": "Découvrir le parcours",
+    "inspiration": "Un peu d’inspiration",
+    "escape": "ENVIE D’AILLEURS ?",
+    "kribi": "Prochain arrêt : Kribi.",
+    "hotelTitle": "Posez vos valises.",
+    "activityTitle": "Faites-en un souvenir.",
+    "hotelAlt": "Un séjour au bord de la piscine",
+    "activityAlt": "Un moment partagé entre amis",
+    "nextBreak": "Votre prochaine pause",
+    "bestMoments": "Les meilleurs moments",
+    "yourStay": "Un séjour à votre image",
+    "yourActivity": "À chaque envie, une sortie",
+    "hotelDetail": "En ville ou au bord de l’eau",
+    "activityDetail": "Cinéma, loisirs, découvertes"
+  },
+  "services": {
+    "tabs": "Les envies MboaGo",
+    "label": "Découvrez les services MboaGo",
+    "announcement": "{{service}} : présentation affichée.",
+    "travel": {
+      "label": "Prenez la route",
+      "category": "Voyages en bus"
+    },
+    "stay": {
+      "label": "Posez vos valises",
+      "category": "Hôtels & chambres",
+      "announcement": "Séjours à l’hôtel"
+    },
+    "activity": {
+      "label": "Vivez le moment",
+      "category": "Activités & sorties",
+      "announcement": "Sorties et activités"
+    }
+  },
+  "cards": {
+    "preview": "Aperçu : {{label}}",
+    "labels": {
+      "route": "Votre trajet",
+      "seat": "Votre place",
+      "ticket": "Votre billet",
+      "stay": "Votre hébergement",
+      "destination": "Votre destination",
+      "booking": "Votre réservation",
+      "activities": "Vos idées de sorties",
+      "friends": "Vos moments à partager",
+      "discovery": "Votre prochaine découverte"
+    },
+    "nextTrip": "Votre prochain voyage",
+    "oneWay": "Aller simple",
+    "window": "Fenêtre ou couloir ?",
+    "choice": "À vous de choisir.",
+    "hotelAlt": "Hôtel avec piscine et palmiers",
+    "friendsAlt": "Une sortie partagée entre amis",
+    "hotelCaption": "Un hôtel, votre petite parenthèse.",
+    "friendsCaption": "Ensemble, c’est encore mieux.",
+    "favoriteSeat": "Votre place préférée.",
+    "hotelEyebrow": "MON SÉJOUR À L’HÔTEL",
+    "ticketEyebrow": "MES BILLETS",
+    "doubleRoom": "Chambre double, s’il vous plaît.",
+    "hotelDetails": "Votre chambre · Vos dates · Votre tarif",
+    "tripDetails": "Trajet · Départ · Siège",
+    "hotelFooter": "Le séjour qui vous ressemble.",
+    "ticketFooter": "Tout est là. Dans votre poche.",
+    "address": "Votre prochaine adresse ?",
+    "beachAlt": "Une plage bordée de palmiers à Kribi, pour une activité en plein air",
+    "outdoors": "Sorties, loisirs, grand air. On y va ?",
+    "cinema": "Un bon film",
+    "friends": "Entre amis",
+    "freshAir": "Au grand air",
+    "nightlife": "Après le sunset"
+  },
+  "moments": {
+    "eyebrow": "LE VOYAGE CONTINUE ICI",
+    "titleStart": "Les bons moments,",
+    "titleEnd": "ça se partage",
+    "description": "Des idées pour sortir. Des souvenirs pour sourire.",
+    "explore": {
+      "preview": "Aperçu de la page Explorer",
+      "alt": "Une plage de Kribi à découvrir dans Explorer",
+      "tag": "LES IDÉES DES VOYAGEURS",
+      "destination": "Un week-end à Kribi ?",
+      "caption": "Océan, palmiers et zéro réveil.",
+      "title": "Tiens, et si on allait là ?",
+      "description": "Dans <strong>Explorer</strong>, un fil de photos et de vidéos pour découvrir des lieux, des hôtels et des activités."
+    },
+    "memories": {
+      "preview": "Aperçu des photos et souvenirs sur votre profil",
+      "mountainAlt": "Escapade au pied du mont Cameroun",
+      "mountainCaption": "Un grand bol d’air.",
+      "stayAlt": "Un souvenir de séjour au bord de l’océan",
+      "stayCaption": "À refaire, ensemble.",
+      "tag": "Photos, vidéos & vlogs",
+      "title": "Gardez les petits bonheurs.",
+      "description": "Vos photos, vos vidéos, vos vlogs : rassemblez vos <strong>souvenirs sur votre profil</strong> et partagez vos moments préférés."
+    },
+    "groups": {
+      "preview": "Aperçu des groupes de voyages et d’activités",
+      "invitation": "On y va ensemble ?",
+      "trip": "Week-end à Kribi",
+      "tripDescription": "Le voyage de la bande",
+      "bowling": "La team bowling",
+      "bowlingDescription": "Un strike, et des fous rires.",
+      "travelTag": "Voyages en groupe",
+      "activityTag": "Activités entre amis",
+      "title": "Plus on est, plus on vit.",
+      "description": "Un voyage à plusieurs, une activité entre amis : retrouvez vos <strong>groupes dans l’app</strong> et partagez l’aventure."
+    }
+  },
+  "meta": {
+    "title": "MboaGo — Le Cameroun, à portée de main.",
+    "description": "Un trajet, une escapade, un nouveau souvenir. Découvrez MboaGo, l’application qui réunit voyages en bus, hôtels et activités au Cameroun.",
+    "imageAlt": "MboaGo — Voyagez. Séjournez. Profitez."
+  },
+  "notFound": {
+    "title": "Page introuvable · MboaGo",
+    "heading": "Cette page n’existe pas.",
+    "description": "Retrouvez vos prochaines envies sur MboaGo.",
+    "link": "Revenir à l’accueil"
+  }
+}

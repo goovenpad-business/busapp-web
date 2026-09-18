@@ -171,6 +171,140 @@ h2 {
   justify-content: space-between;
   gap: 25px;
 }
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.language-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.language-trigger {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 124px;
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.language-trigger:hover,
+.language-trigger[aria-expanded='true'] {
+  border-color: #c2c8ce;
+  box-shadow: 0 3px 10px #202b3308;
+}
+.language-trigger > svg {
+  flex-shrink: 0;
+}
+.language-trigger > svg:last-child {
+  margin-left: auto;
+  transition: transform 0.2s;
+}
+.language-trigger[aria-expanded='true'] > svg:last-child {
+  transform: rotate(180deg);
+}
+.language-popover {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 224px;
+  padding: 8px;
+  border: 1px solid #202b330d;
+  border-radius: 21px;
+  background: #fff;
+  box-shadow:
+    0 18px 48px -12px #202b3329,
+    0 4px 12px #202b3308;
+  transform-origin: top right;
+  animation: language-menu-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.language-caption {
+  margin: 5px 10px 10px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 54px;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.language-option + .language-option {
+  margin-top: 4px;
+}
+.language-option:hover {
+  background: var(--paper);
+}
+.language-option[aria-checked='true'] {
+  background: var(--action);
+  color: #fff;
+}
+.language-option:focus-visible {
+  outline-offset: -3px;
+}
+.language-code {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.language-option[aria-checked='true'] .language-code {
+  border-color: #ffffff1a;
+  background: #ffffff0d;
+}
+.language-check {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--action);
+}
+@keyframes language-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
 .brand {
   display: inline-flex;
   align-items: center;
@@ -475,19 +609,6 @@ h2 {
   color: #16865c;
   border-radius: 50%;
   margin-left: 5px;
-}
-.preview-caption {
-  position: absolute;
-  bottom: 3px;
-  right: 9px;
-  font-size: 9px;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.preview-caption svg {
-  transform: rotate(25deg);
 }
 .phone {
   width: 270px;
@@ -2016,6 +2137,10 @@ a.store-link:hover {
   }
   .header-inner {
     height: 73px;
+    gap: 12px;
+  }
+  .header-actions {
+    gap: 8px;
   }
   .desktop-nav,
   .header-cta {
@@ -2107,10 +2232,6 @@ a.store-link:hover {
   }
   .ticket-label {
     left: 10px;
-  }
-  .preview-caption {
-    bottom: 0;
-    right: 10px;
   }
   .intro-strip {
     display: grid;
@@ -2394,6 +2515,38 @@ a.store-link:hover {
     display: none;
   }
 }
+
+@media (max-width: 430px) {
+  .header-inner {
+    gap: 6px;
+  }
+  .header-inner .brand {
+    font-size: 22px;
+  }
+  .header-inner .brand-symbol {
+    width: 31px;
+    height: 33px;
+    margin-right: 5px;
+  }
+  .header-actions {
+    gap: 4px;
+  }
+  .header-actions .menu-toggle {
+    width: 36px;
+  }
+  .language-trigger {
+    width: 110px;
+    padding: 10px 8px;
+    gap: 5px;
+    font-size: 11px;
+  }
+  .language-trigger > svg:first-child {
+    width: 18px;
+  }
+  .language-trigger > svg:last-child {
+    width: 10px;
+  }
+}
 @media (max-width: 430px) {
   .container {
     width: calc(100% - 36px);
@@ -2453,11 +2606,6 @@ a.store-link:hover {
     left: -14px;
     bottom: 47px;
     transform: rotate(-3deg);
-  }
-  .preview-caption {
-    right: -9px;
-    bottom: 6px;
-    font-size: 8px;
   }
   .hero-orbit {
     width: 385px;
@@ -2614,4 +2762,12 @@ a.store-link:hover {
     opacity: 1;
     transform: none;
   }
+}
+
+.cover-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

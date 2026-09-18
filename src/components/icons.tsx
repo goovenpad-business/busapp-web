@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { ControlGlyph, type ControlGlyphName } from './ControlGlyph';
 import { PremiumGlyph, type PremiumGlyphName } from './PremiumGlyph';
 
@@ -34,11 +35,12 @@ export function Arrow({
 }
 
 export function Brand({ light = false }: { light?: boolean }) {
+  const { t } = useTranslation();
   return (
     <a
       href="#accueil"
       className={`brand${light ? ' brand-light' : ''}`}
-      aria-label="MboaGo, accueil"
+      aria-label={t('navigation.home')}
     >
       <span className="brand-symbol">
         <Icon name="bus" size={29} />

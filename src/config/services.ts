@@ -1,11 +1,24 @@
 export const serviceModes = [
-  { id: 'travel', label: 'Prenez la route', icon: 'bus', announcement: 'Voyages en bus' },
-  { id: 'stay', label: 'Posez vos valises', icon: 'hotel', announcement: 'Séjours à l’hôtel' },
+  {
+    id: 'travel',
+    label: 'services.travel.label',
+    category: 'services.travel.category',
+    icon: 'bus',
+    announcement: 'services.travel.category',
+  },
+  {
+    id: 'stay',
+    label: 'services.stay.label',
+    category: 'services.stay.category',
+    icon: 'hotel',
+    announcement: 'services.stay.announcement',
+  },
   {
     id: 'activity',
-    label: 'Vivez le moment',
+    label: 'services.activity.label',
+    category: 'services.activity.category',
     icon: 'activity',
-    announcement: 'Sorties et activités',
+    announcement: 'services.activity.announcement',
   },
 ] as const;
 

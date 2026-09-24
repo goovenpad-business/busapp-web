@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
-import { navigation } from '@/config/site';
+import { navigation, site } from '@/config/site';
 import { LanguageSelector } from './language-selector';
 import { Arrow, Brand } from './icons';
 
@@ -31,6 +31,9 @@ export function Navigation() {
           ))}
         </nav>
         <div className="header-actions">
+          <a className="header-pro-link" href={site.management}>
+            {t('navigation.professionals')} <Arrow name="external" size={14} />
+          </a>
           <LanguageSelector />
           <a className="button button-dark header-cta" href="#telecharger">
             {t('navigation.app')} <Arrow name="external" size={17} />
@@ -59,6 +62,9 @@ export function Navigation() {
             <Arrow size={18} />
           </a>
         ))}
+        <a href={site.management} onClick={() => setOpen(false)}>
+          {t('navigation.professionals')} <Arrow name="external" size={18} />
+        </a>
         <a href="#telecharger" onClick={() => setOpen(false)}>
           {t('navigation.get')} <Arrow name="external" size={18} />
         </a>

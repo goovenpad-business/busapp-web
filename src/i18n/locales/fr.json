@@ -21,7 +21,8 @@
     "get": "Obtenir MboaGo",
     "footer": "Navigation de pied de page",
     "top": "Revenir en haut de page",
-    "home": "MboaGo, accueil"
+    "home": "MboaGo, accueil",
+    "professionals": "Professionnels"
   },
   "language": {
     "label": "Langue du site"
@@ -266,5 +267,11 @@
     "heading": "Cette page n’existe pas.",
     "description": "Retrouvez vos prochaines envies sur MboaGo.",
     "link": "Revenir à l’accueil"
+  },
+  "professionals": {
+    "eyebrow": "VOUS FAITES VIVRE CES EXPÉRIENCES ?",
+    "title": "Bienvenue de l’autre côté du voyage.",
+    "description": "Agence de voyages, hôtel ou activité : un espace pour présenter votre établissement, gérer vos réservations et coordonner votre équipe.",
+    "cta": "Découvrir l’espace partenaires"
   }
 }

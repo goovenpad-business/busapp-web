@@ -98,3 +98,5 @@ L’hébergement doit servir `/en/index.html` à l’adresse `/en/` (index de r�
 La sortie est désormais `dist/`. Les anciens dossiers `.next/` et `out/` ne sont plus utilisés. Les versions sont verrouillées dans `package-lock.json`. Documentation : [Vite — build de production](https://vite.dev/guide/build).
 
 Les visuels et données de présentation viennent du prototype mobile ; aucune affiliation avec des opérateurs ni disponibilité commerciale n’est affirmée. Les mentions de lancement et les destinations doivent être validées avant ouverture commerciale.
+
+L’espace professionnel est accessible depuis le menu, le bloc partenaires et le pied de page, en français et en anglais. Les liens ouvrent l’accueil public `https://mboago-management.goovenpad.com/`. `VITE_MANAGEMENT_URL` permet de remplacer cette destination HTTPS lors du build.

@@ -21,7 +21,8 @@
     "get": "Get MboaGo",
     "footer": "Footer navigation",
     "top": "Back to top",
-    "home": "MboaGo, home"
+    "home": "MboaGo, home",
+    "professionals": "For businesses"
   },
   "language": {
     "label": "Website language"
@@ -266,5 +267,11 @@
     "heading": "This page doesn’t exist.",
     "description": "Find your next adventure on MboaGo.",
     "link": "Back to home"
+  },
+  "professionals": {
+    "eyebrow": "BRINGING THESE EXPERIENCES TO LIFE?",
+    "title": "Welcome to the business side of the journey.",
+    "description": "Travel agency, hotel or activity: one workspace to showcase your business, manage bookings and coordinate your team.",
+    "cta": "Explore the partner platform"
   }
 }

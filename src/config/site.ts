@@ -1,6 +1,7 @@
 import { createSite } from './site-settings';
 export const site = createSite({
   VITE_SITE_URL: import.meta.env.VITE_SITE_URL,
+  VITE_MANAGEMENT_URL: import.meta.env.VITE_MANAGEMENT_URL,
   VITE_APP_STORE_URL: import.meta.env.VITE_APP_STORE_URL,
   VITE_GOOGLE_PLAY_URL: import.meta.env.VITE_GOOGLE_PLAY_URL,
 });

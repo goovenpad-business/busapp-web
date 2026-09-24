@@ -14,6 +14,7 @@ function httpsUrl(value: string | undefined, hosts?: string[]) {
 export function createSite(env: Record<string, string | undefined>) {
   return {
     name: 'MboaGo',
+    management: httpsUrl(env.VITE_MANAGEMENT_URL) ?? 'https://mboago-management.goovenpad.com/',
     title: fr.meta.title,
     description: fr.meta.description,
     url: httpsUrl(env.VITE_SITE_URL),

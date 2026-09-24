@@ -281,6 +281,21 @@ export default function Home() {
             </div>
           </Reveal>
         </section>
+        <section className="professionals-section container" aria-labelledby="professionals-title">
+          <Reveal className="professionals-card">
+            <div className="professionals-emblem" aria-hidden="true">
+              <Icon name="briefcase" size={42} />
+            </div>
+            <div className="professionals-copy">
+              <span className="eyebrow">{t('professionals.eyebrow')}</span>
+              <h2 id="professionals-title">{t('professionals.title')}</h2>
+              <p>{t('professionals.description')}</p>
+            </div>
+            <a href={site.management} className="button button-dark">
+              {t('professionals.cta')} <Arrow name="external" size={19} />
+            </a>
+          </Reveal>
+        </section>
       </main>
       <footer className="site-footer container">
         <div className="footer-top">
@@ -294,6 +309,7 @@ export default function Home() {
                 {t(item.label)}
               </a>
             ))}
+            <a href={site.management}>{t('navigation.professionals')}</a>
           </nav>
           <a href="#accueil" className="back-to-top" aria-label={t('navigation.top')}>
             <Arrow name="up" size={22} />
